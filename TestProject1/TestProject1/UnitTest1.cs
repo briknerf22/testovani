@@ -12,12 +12,12 @@ namespace TestProject1
         [TestClass]
         public class StackTests
         {
-            private Stack stack;
+            private Stack<int> stack;
 
             [TestInitialize]
             public void Setup()
             {
-                stack = new Stack();
+                stack = new Stack<int>();
             }
 
             [TestMethod]
