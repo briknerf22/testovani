@@ -1,62 +1,57 @@
 using fronta;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace TestProject1
 {
     [TestClass]
-    public class UnitTest1
+    public class StackTests
     {
-        [TestMethod]
-        public void TestMethod1()
+        private Stack<int> stack;
+
+        [TestInitialize]
+        public void Setup()
         {
+            stack = new Stack<int>();
         }
-        [TestClass]
-        public class StackTests
+
+        [TestMethod]
+        public void TestPushPop()
         {
-            private Stack<int> stack;
+            stack.Push(1);
+            stack.Push(2);
+            Assert.AreEqual(2, stack.Pop());
+            Assert.AreEqual(1, stack.Pop());
+        }
 
-            [TestInitialize]
-            public void Setup()
-            {
-                stack = new Stack<int>();
-            }
+        [TestMethod]
+        public void TestPeek()
+        {
+            stack.Push(1);
+            stack.Push(2);
+            Assert.AreEqual(2, stack.Peek());
+            Assert.AreEqual(2, stack.Count);
+            stack.Pop();
+            Assert.AreEqual(1, stack.Peek());
+            Assert.AreEqual(1, stack.Count);
+        }
 
-            [TestMethod]
-            public void TestPushPop()
-            {
-                stack.Push(1);
-                stack.Push(2);
-                Assert.AreEqual(2, stack.Pop());
-                Assert.AreEqual(1, stack.Pop());
-            }
+        [TestMethod]
+        public void TestIsEmpty()
+        {
+            Assert.IsTrue(stack.Count == 0);
+            stack.Push(1);
+            Assert.IsFalse(stack.Count == 0);
+            stack.Pop();
+            Assert.IsTrue(stack.Count == 0);
+        }
 
-            [TestMethod]
-            public void TestPeek()
-            {
-                stack.Push(1);
-                stack.Push(2);
-                Assert.AreEqual(2, stack.Peek());
-                Assert.AreEqual(2, stack.Size());
-                stack.Pop();
-                Assert.AreEqual(1, stack.Peek());
-                Assert.AreEqual(1, stack.Size());
-            }
-
-            [TestMethod]
-            public void TestIsEmpty()
-            {
-                Assert.IsTrue(stack.IsEmpty());
-                stack.Push(1);
-                Assert.IsFalse(stack.IsEmpty());
-                stack.Pop();
-                Assert.IsTrue(stack.IsEmpty());
-            }
-
-            [TestMethod]
-            [ExpectedException(typeof(IndexOutOfRangeException))]
-            public void TestPopEmptyStack()
-            {
-                stack.Pop();
-            }
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))] // InvalidOperationException for an empty stack
+        public void TestPopEmptyStack()
+        {
+            stack.Pop();
         }
     }
 }
