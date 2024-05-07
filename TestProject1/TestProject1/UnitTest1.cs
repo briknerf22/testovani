@@ -1,19 +1,19 @@
-using fronta;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using Program;
 
 namespace TestProject1
 {
     [TestClass]
     public class StackTests
     {
-        private Stack<int> stack;
+        private Program.Stack<int> stack;
 
         [TestInitialize]
         public void Setup()
         {
-            stack = new Stack<int>();
+            stack = new Program.Stack<int>();
         }
 
         [TestMethod]
